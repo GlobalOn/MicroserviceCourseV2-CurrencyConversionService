@@ -1,4 +1,4 @@
-package com.microserviceCourse.currencyconversionservice;
+package com.microserviceCourse.currencyconversionservice.repository;
 
 import com.microserviceCourse.currencyconversionservice.entity.CurrencyConversion;
 import org.springframework.data.repository.CrudRepository;
