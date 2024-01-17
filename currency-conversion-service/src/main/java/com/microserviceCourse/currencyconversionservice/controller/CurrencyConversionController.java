@@ -59,7 +59,7 @@ public class CurrencyConversionController {
             currencyConversion.setQuantity(quantity);
             BigDecimal total = new BigDecimal(quantity.intValue() * currencyConversion.getConversionMultiple().intValue());
             currencyConversion.setTotalCalculatedAmount(total);
-            currencyConversion.setEnvironment(environment.getProperty("local.server.port"));
+//            currencyConversion.setEnvironment(environment.getProperty("local.server.port"));
 
             return currencyConversion;
         } else
