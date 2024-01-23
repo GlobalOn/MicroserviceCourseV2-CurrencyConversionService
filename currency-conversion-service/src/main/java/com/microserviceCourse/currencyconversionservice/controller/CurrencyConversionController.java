@@ -21,12 +21,15 @@ public class CurrencyConversionController {
     private Environment environment;
     private CurrencyConversionRepository repository;
     private CurrencyExchangeProxy exchangeServiceProxy;
+    private RestTemplate restTemplate;
 
     @Autowired
-    public CurrencyConversionController(Environment environment, CurrencyConversionRepository repository, CurrencyExchangeProxy exchangeServiceProxy) {
+    public CurrencyConversionController(Environment environment, CurrencyConversionRepository repository,
+                                        CurrencyExchangeProxy exchangeServiceProxy, RestTemplate restTemplate) {
         this.environment = environment;
         this.repository = repository;
         this.exchangeServiceProxy = exchangeServiceProxy;
+        this.restTemplate = restTemplate;
     }
 
     @GetMapping("/currency-conversion/{from}/{to}/quantity/{quantity}")
@@ -35,7 +38,7 @@ public class CurrencyConversionController {
         HashMap<String, String> uriVariables = new HashMap<>();
         uriVariables.put("from", from);
         uriVariables.put("to", to);
-        ResponseEntity<CurrencyConversion> responseEntity = new RestTemplate().getForEntity("http://localhost:8000/currency-exchange/{from}/{to}",
+        ResponseEntity<CurrencyConversion> responseEntity = restTemplate.getForEntity("http://localhost:8000/currency-exchange/{from}/{to}",
                 CurrencyConversion.class, uriVariables);
 
         CurrencyConversion currencyConversion = responseEntity.getBody();
